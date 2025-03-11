@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivas' School Of Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #3a47d5, #ff44d7);
+            border-bottom: 5px solid #f0c929;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger-menu {
+            width: 30px;
+            height: 35px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .hamburger-menu:hover {
+            transform: rotate(2deg);
+        }
+
+        .logo-container {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            padding-right: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        /* Right Section Styles */
+        .right-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dropdown Menu Styles */
+        .menu-dropdown {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .menu-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #3a47d5;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-button:after {
+            content: "";
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #3a47d5;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button.active:after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f5f9;
+            color: #3a47d5;
+            padding-left: 20px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 8px 0;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background: linear-gradient(45deg, #3a47d5, #00d2ff);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Initially hidden */
+    width: 280px;
+    overflow-x: hidden;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+    transition: left 0.6s ease-out, opacity 0.4s ease-in, transform 0.6s ease-out;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(-30px); /* Starts slightly left for a smoother effect */
+}
+
+/* Active State - Sidebar Appears */
+.sidebar.active {
+    left: 0;
+    opacity: 1;
+    transform: translateX(0); /* Moves naturally into place */
+}
+
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-button:hover {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-logo {
+            width: 100%;
+            margin: 10px auto 30px;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            margin-left: 20px;
+        }
+
+        .sidebar-logo img {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .sidebar-menu-item:hover {
+            background-color: #a8cdf3;
+            color: #3a47d5;
+        }
+
+        .sidebar-menu-item img {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar hr {
+            height: 1px;
+            background: #e5e7eb;
+            border: none;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .social-container {
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        .social-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon.facebook {
+            background: #1877f2;
+        }
+
+        .social-icon.twitter {
+            background: #1da1f2;
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icon.linkedin {
+            background: #0077b5;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+          /* Responsive Styles */
+          @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                width: 350px;
+                max-height: 400px;
+            }
+
+            .card-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .search-container {
+                max-width: 300px;
+            }
+
+            .sidebar {
+                width: 250px;
+                left: -250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 200px;
+                margin: 0 10px;
+            }
+            
+            .menu-button span {
+                display: none;
+            }
+            
+            .login-button {
+                display: none;
+            }
+            
+            .logo-container {
+                width: 40px;
+                height: 40px;
+            }
+
+            .sidebar {
+                width: 230px;
+                left: -230px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 10px 15px;
+            }
+            
+            .search-container {
+                max-width: 150px;
+            }
+            
+            .hamburger-menu {
+                margin-right: 10px;
+                width: 25px;
+                height: 25px;
+            }
+            
+            .main-content {
+                padding: 30px 15px;
+            }
+            
+            .sidebar {
+                width: 200px;
+                left: -200px;
+                padding: 15px;
+            }
+
+            .sidebar-menu-item {
+                padding: 10px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                max-width: 120px;
+            }
+            
+            .menu-dropdown {
+                margin-right: 5px;
+            }
+            
+            .menu-button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="left-section">
+            <img src="ham.png" alt="Menu" class="hamburger-menu" id="hamburger-menu">
+            <div class="logo-container">
+                <img src="IMG_1990.PNG" alt="Music School Logo" id="company-logo">
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <img src="search.png" alt="Search" class="search-icon">
+        </div>
+        
+        <div class="right-section">
+            <div class="menu-dropdown">
+                <button class="menu-button" id="menu-button">Menu</button>
+                <div class="dropdown-content" id="dropdown-menu">
+                    <a href="#aboutus">About Us</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#branches">Branches</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Need Help?</a>
+                    <a href="$">explore Classes</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Youtube</a>
+                </div>
+            </div>
+            <button class="login-button">Login</button>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <img src="close.png" alt="Close" class="close-button" id="close-button">
+        <div class="sidebar-logo">
+            <img src="IMG_1990.PNG" alt="Music School Logo" id="sidebar-logo">
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="home.html" class="sidebar-menu-item">
+                    <img src="home.png" alt="Home"> Home
+                </a>
+            </li>
+            <li>
+                <a href="classes.html" class="sidebar-menu-item">
+                    <img src="classes.png" alt="Classes"> Music Classes
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="teachers.png" alt="Teachers"> Our Teachers
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="instumentmodel.html" class="sidebar-menu-item">
+                    <img src="instruemtns.png" alt="Instruments">Available Instrument Models
+
+                </a>
+            </li>
+            <li>
+                <a href="schedule.html" class="sidebar-menu-item">
+                    <img src="shedule.png" alt="Schedule"> Class Schedule
+                </a>
+            </li>
+            <li>
+                <a href="events.html" class="sidebar-menu-item">
+                    <img src="upcoming events.png" alt="Events"> Upcoming Events
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="aboutus.html" class="sidebar-menu-item">
+                    <img src="about us.png" alt="About"> About Us
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="contactus.png" alt="Contact"> Contact
+                </a>
+            </li>
+            <li>
+                <a href="faq.html" class="sidebar-menu-item">
+                    <img src="faq.png" alt="FAQ"> FAQ
+                </a>
+            </li>
+            <li>
+                <a href="Feauters.html" class="sidebar-menu-item">
+                    <img src="enroll.png" alt="Enroll">Feauters
+                </a>
+            </li>
+        </ul>
+        
+        <div class="social-container">
+            <p class="social-title">Follow us on</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Music School. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    <script>
+        // Toggle sidebar
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        });
+        
+        document.getElementById('close-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        // Toggle dropdown menu
+        document.getElementById('menu-button').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('dropdown-menu').classList.toggle('active');
+        });
+        
+        // Close dropdown menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown-menu');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+                menuButton.classList.remove('active');
+            }
+        });
+        
+        // Animation for content sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section, .hero-section, .branches-section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Check visibility on load
+            checkVisibility();
+            
+            // Check visibility on scroll
+            window.addEventListener('scroll', checkVisibility);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+});
+
+    </script>
+ 
+<div class="available-instruments">
+  <h2 class="section-title">Available Instruments</h2>
+  
+  <!-- Keyboards Section -->
+  <div class="instrument-category">
+    <h3 class="category-title">Keyboards</h3>
+    <div class="instruments-container">
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="e473.jpeg" alt="Roland Fantom-8" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Yamaha keyboard PSR-e473</h4>
+            <p>Year Released: 2022</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="e373.jpeg" alt="Korg Kronos 2" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Yamaha keyboard PSR-e373</h4>
+            <p>Year Released:2020</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Nord Stage 3" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Nord Stage 3</h4>
+            <p>Performance keyboard (2019)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Yamaha MODX8" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Yamaha MODX8</h4>
+            <p>88-key synthesizer (2018)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Arturia KeyLab 88 MkII" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Arturia KeyLab 88 MkII</h4>
+            <p>MIDI controller (2022)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Sequential Prophet X" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Sequential Prophet X</h4>
+            <p>Hybrid synthesizer (2023)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Pianos Section -->
+  <div class="instrument-category">
+    <h3 class="category-title">Pianos</h3>
+    <div class="instruments-container">
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Steinway & Sons Model D" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Steinway & Sons Model D</h4>
+            <p>Concert grand piano (2023)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Yamaha Clavinova CLP-785" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Yamaha Clavinova CLP-785</h4>
+            <p>Digital piano (2022)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Drums Section -->
+  <div class="instrument-category">
+    <h3 class="category-title">Drums</h3>
+    <div class="instruments-container">
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Pearl Masters Maple Complete" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Pearl Masters Maple Complete</h4>
+            <p>7-piece drum kit (2023)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Roland V-Drums TD-50KV2" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Roland V-Drums TD-50KV2</h4>
+            <p>Electronic drum kit (2022)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Tama Starclassic" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Tama Starclassic Walnut/Birch</h4>
+            <p>Professional drum set (2021)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Wind Instruments Section -->
+  <div class="instrument-category">
+    <h3 class="category-title">Wind Instruments</h3>
+    <div class="instruments-container">
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Yamaha Trumpet" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Yamaha YTR-8335RS Xeno</h4>
+            <p>Professional Bb trumpet (2022)</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instrument-item">
+        <div class="instrument-inner">
+          <img src="/api/placeholder/300/200" alt="Selmer Saxophone" class="instrument-image">
+          <div class="instrument-details">
+            <h4>Selmer Paris Reference 54</h4>
+            <p>Alto saxophone (2021)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CSS for the instruments section with enhanced gradients and animations -->
+<style>
+  .available-instruments {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    background: transparent;
+    overflow: hidden;
+  }
+  
+  .available-instruments:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+    background: linear-gradient(90deg, #e9c46a, #f4a261, #e76f51);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    padding-bottom: 15px;
+    animation: fadeInTop 1.2s ease-out forwards;
+  }
+  
+  .section-title:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(90deg, #2a9d8f, #4895ef);
+  }
+  
+  .category-title {
+    font-size: 2.2rem;
+    margin: 40px 0 25px;
+    background: linear-gradient(90deg, #4895ef, #4cc9f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-left: 15px;
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #4895ef, #4cc9f0) 1;
+    animation: fadeInLeft 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .instruments-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+    perspective: 1000px;
+  }
+  
+  .instrument-item {
+    position: relative;
+    height: 280px;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .instrument-inner {
+    position: relative;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(40,40,80,0.7) 0%, rgba(30,30,60,0.8) 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+    transform: translateZ(0);
+  }
+  
+  .instrument-item:hover .instrument-inner {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  }
+  
+  .instrument-item:hover .instrument-image {
+    transform: scale(1.05);
+  }
+  
+  .instrument-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    transition: transform 0.5s ease;
+  }
+  
+  .instrument-details {
+    padding: 18px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(27, 87, 255, 0.7));
+  }
+  
+  .instrument-details h4 {
+    margin: 0 0 8px;
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    transition: color 0.3s ease;
+  }
+  
+  .instrument-item:hover .instrument-details h4 {
+    color: #4cc9f0;
+  }
+  
+  .instrument-details p {
+    margin: 0;
+    color: #ccc;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Custom animation for bottom to top fade in */
+  @keyframes fadeInTop {
+    from { 
+      opacity: 0; 
+      transform: translateY(60px);
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInLeft {
+    from { 
+      opacity: 0; 
+      transform: translateX(-30px);
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0);
+    }
+  }
+  
+  /* Glass effect */
+  .instrument-category {
+    position: relative;
+    padding: 10px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInTop 0.8s ease-out forwards;
+  }
+  
+  /* Custom animation delays for smoother appearance */
+  .instrument-category:nth-child(1) { animation-delay: 0.1s; }
+  .instrument-category:nth-child(2) { animation-delay: 0.3s; }
+  .instrument-category:nth-child(3) { animation-delay: 0.5s; }
+  .instrument-category:nth-child(4) { animation-delay: 0.7s; }
+  
+  /* Custom animation for the instrument cards - will be triggered by JS */
+  .instrument-item.appear {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .instruments-container {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .section-title {
+      font-size: 2.2rem;
+    }
+    
+    .category-title {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
+<script>
+  // Enhanced animation script for bottom-to-top fade in
+  document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.instrument-item');
+    const categories = document.querySelectorAll('.category-title');
+    
+    // Function to check if element is in viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      return (
+        rect.top <= windowHeight - 100 &&
+        rect.bottom >= 0
+      );
+    }
+    
+    // Function to add appear class to elements in viewport
+    function checkElements() {
+      items.forEach((item, index) => {
+        if (isInViewport(item)) {
+          // Add staggered delay for smoother animation
+          setTimeout(() => {
+            item.classList.add('appear');
+          }, 100 * (index % 6)); // Group delay by row
+        }
+      });
+      
+      categories.forEach(category => {
+        if (isInViewport(category)) {
+          category.style.opacity = '1';
+        }
+      });
+    }
+    
+    // Run on scroll and initially
+    window.addEventListener('scroll', checkElements);
+    window.addEventListener('resize', checkElements);
+    
+    // Initial check
+    setTimeout(checkElements, 100);
+  });
+</script></body></html>

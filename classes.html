@@ -216,6 +216,7 @@
         /* Sidebar Styles */
 .sidebar {
     position: fixed;
+    overflow-x: hidden;
     top: 0;
     left: -280px; /* Initially hidden */
     width: 280px;
@@ -563,12 +564,12 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="home.html" class="sidebar-menu-item">
                     <img src="home.png" alt="Home"> Home
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="classes.html" class="sidebar-menu-item">
                     <img src="classes.png" alt="Classes"> Music Classes
                 </a>
             </li>
@@ -579,23 +580,24 @@
             </li>
             <hr>
             <li>
-                <a href="#" class="sidebar-menu-item">
-                    <img src="instruemtns.png" alt="Instruments"> Instruments
+                <a href="instumentmodel.html" class="sidebar-menu-item">
+                    <img src="instruemtns.png" alt="Instruments">Available Instrument Models
+
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="schedule.html" class="sidebar-menu-item">
                     <img src="shedule.png" alt="Schedule"> Class Schedule
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="events.html" class="sidebar-menu-item">
                     <img src="upcoming events.png" alt="Events"> Upcoming Events
                 </a>
             </li>
             <hr>
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="aboutus.html" class="sidebar-menu-item">
                     <img src="about us.png" alt="About"> About Us
                 </a>
             </li>
@@ -605,13 +607,13 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-menu-item">
+                <a href="faq.html" class="sidebar-menu-item">
                     <img src="faq.png" alt="FAQ"> FAQ
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-menu-item">
-                    <img src="enroll.png" alt="Enroll"> Enroll Now
+                <a href="Feauters.html" class="sidebar-menu-item">
+                    <img src="enroll.png" alt="Enroll">Feauters
                 </a>
             </li>
         </ul>
@@ -749,89 +751,195 @@
         <h3>Available Courses</h3>
         <div class="category-grid">
           <a href="#" class="category-card">
-            <div class="category-icon">🎸</div>
+            <div class="category-icon"><img src="guitarimg.jpeg" style="max-width:500px;"></div>
             <h4>Guitar Classes</h4>
             <p>Expert, passionate, engaging, skilled, dedicated.</p>
           </a>
           <a href="#" class="category-card">
-            <div class="category-icon">🎹</div>
+            <div class="category-icon"><img src="keyboard.jpeg" style="max-width:500px ;"></div>
             <h4>Keyboard Classes</h4>
             <p>Expert, passionate, engaging, skilled, inspiring.</p>
           </a>
           <a href="#" class="category-card">
-            <div class="category-icon">🥁</div>
+            <div class="category-icon"><img src="drumsimg.jpeg" style="max-width:500px;"></div>
             <h4>Drums Classes</h4>
             <p>Dynamic, energetic, rhythmic, skilled, motivating.</p>
           </a>
           <a href="#" class="category-card">
-            <div class="category-icon">🎷</div>
+            <div class="category-icon"><img src="vocal.jpeg" style="max-width: 500px;"></div>
             <h4>Vocal Classes</h4>
             <p>Find your voice, master the melody, and sing with confidence!</p>
           </a>
           <a href="#" class="category-card">
-            <div class="category-icon">🎺</div>
+            <div class="category-icon"><img src="piano.jpeg" style="max-width: 500px;"></div>
             <h4>Piano Classes</h4>
             <p>Let your fingers dance, master the keys, and play with passion!</p>
           </a>
           <a href="#" class="category-card">
-            <div class="category-icon">🎤</div>
-            <h4>Vocal Training</h4>
-            <p>Classical, Pop, Jazz</p>
+            <div class="category-icon"><img src="dance.jpeg" style="max-width: 500px;"></div>
+            <h4>Western Dance</h4>
+            <p>Learn western dance easy.</p>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon"><img src="drawing.jpeg" style="max-width: 500px;"></div>
+            <h4>Drawing Classes</h4>
+            <p>Help your child to become a artist.</p>
           </a>
         </div>
+        <style>/* Comprehensive mobile-first fix for category grid */
+          .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+          }
+          
+          /* Fix each card to be self-contained */
+          .category-card {
+            width: 100%;
+            height: auto;
+            min-height: auto;
+            padding: 15px 10px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+          }
+          
+          /* Control image container size */
+          .category-icon {
+            width: 100%;
+            height: auto;
+            max-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+          }
+          
+          /* Override inline styles and ensure images fit */
+          .category-icon img {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            max-height: 120px;
+            object-fit: contain;
+          }
+          
+          /* Text content adjustments */
+          .category-card h4 {
+            font-size: 1rem;
+            margin: 0 0 5px;
+            word-break: break-word;
+          }
+          
+          .category-card p {
+            font-size: 0.8rem;
+            margin: 0;
+            word-break: break-word;
+          }
+          
+          /* Specific mobile adjustments */
+          @media (max-width: 767px) {
+            .category-grid {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 10px;
+            }
+            
+            .category-icon {
+              max-height: 100px;
+            }
+            
+            .category-icon img {
+              max-height: 100px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .category-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .category-card {
+              padding: 10px;
+            }
+            
+            .category-icon {
+              max-height: 80px;
+            }
+            
+            .category-icon img {
+              max-height: 80px;
+            }
+            
+            .category-card h4 {
+              font-size: 0.9rem;
+            }
+            
+            .category-card p {
+              font-size: 0.75rem;
+            }
+          }
+          
+          @media (max-width: 350px) {
+            .category-grid {
+              grid-template-columns: 1fr;
+            }
+            
+            .category-card {
+              max-width: 100%;
+            }
+            
+            .category-icon {
+              max-height: 100px;
+            }
+          }</style>
       </div>
       
       <!-- Instructor Spotlight -->
       <div class="instructor-spotlight animate-in">
-        <h3>Meet Our Top Instructors</h3>
+        <h3>Students reviews on our classes</h3>
         <div class="instructors-grid">
           <div class="instructor-card">
             <div class="instructor-image">
-              <img src="/api/placeholder/200/200" alt="Instructor Sarah">
+              <img src="drumsimg.jpeg" alt="Instructor Sarah">
             </div>
-            <h4>Sarah Johnson</h4>
-            <p class="instructor-title">Piano & Keyboard Expert</p>
-            <p class="instructor-bio">Concert pianist with 15+ years of teaching experience</p>
+            <h4>Drums Classes</h4>
+            <p class="instructor-title">1st</p>
+            <p class="instructor-bio">Concert Drums teacher with good ambiance for learning.</p>
             <div class="instructor-rating">
               <span class="stars">★★★★★</span>
-              <span class="count">4.9 (127 reviews)</span>
+              <span class="count">4.9 (48 reviews)</span>
             </div>
           </div>
           <div class="instructor-card">
             <div class="instructor-image">
-              <img src="/api/placeholder/200/200" alt="Instructor Michael">
+              <img src="keyboard.jpeg" alt="Instructor Michael">
             </div>
-            <h4>Michael Rodriguez</h4>
-            <p class="instructor-title">Guitar Virtuoso</p>
-            <p class="instructor-bio">Professional guitarist and composer for 20+ years</p>
+            <h4>Keyboard & Piano</h4>
+            <p class="instructor-title">2nd</p>
+            <p class="instructor-bio">Professional teacher with 12+ plus instruments.</p>
             <div class="instructor-rating">
               <span class="stars">★★★★★</span>
-              <span class="count">4.8 (203 reviews)</span>
+              <span class="count">4.8 (90 reviews)</span>
             </div>
           </div>
           <div class="instructor-card">
             <div class="instructor-image">
-              <img src="/api/placeholder/200/200" alt="Instructor Emma">
+              <img src="guitarimg.jpeg" alt="Instructor Emma">
             </div>
-            <h4>Emma Chen</h4>
-            <p class="instructor-title">Violin & String Specialist</p>
-            <p class="instructor-bio">Classical violinist with conservatory training</p>
+            <h4>Guitar Classes</h4>
+            <p class="instructor-title">3rd</p>
+            <p class="instructor-bio">Classical guitarist with friendly personality.</p>
             <div class="instructor-rating">
               <span class="stars">★★★★★</span>
-              <span class="count">4.9 (156 reviews)</span>
+              <span class="count">4.7 (85 reviews)</span>
             </div>
           </div>
-          <div class="instructor-card">
-            <div class="instructor-image">
-              <img src="/api/placeholder/200/200" alt="Instructor James">
-            </div>
-            <h4>James Wilson</h4>
-            <p class="instructor-title">Percussion Expert</p>
-            <p class="instructor-bio">Session drummer with touring experience</p>
-            <div class="instructor-rating">
-              <span class="stars">★★★★★</span>
-              <span class="count">4.7 (98 reviews)</span>
-            </div>
+         
           </div>
         </div>
       </div>
@@ -845,7 +953,7 @@
               <p>"I never thought I could learn piano at my age, but after 8 weeks in Sarah's class, I'm playing songs I've always dreamed of!"</p>
             </div>
             <div class="testimonial-author">
-              <img src="/api/placeholder/60/60" alt="Student Photo">
+              <img src="roud2.jpg" alt="Student Photo">
               <div class="author-info">
                 <h4>Robert Williams</h4>
                 <p>Piano Student, 3 Months</p>
@@ -857,7 +965,7 @@
               <p>"The guitar course exceeded all my expectations. Michael is patient, knowledgeable, and makes learning fun. I'm now playing in a local band!"</p>
             </div>
             <div class="testimonial-author">
-              <img src="/api/placeholder/60/60" alt="Student Photo">
+              <img src="round1.jpg" alt="Student Photo">
               <div class="author-info">
                 <h4>Jennifer Lopez</h4>
                 <p>Guitar Student, 6 Months</p>
@@ -869,7 +977,7 @@
               <p>"Emma's violin lessons have transformed my playing. Her technique tips and personalized feedback have helped me improve rapidly."</p>
             </div>
             <div class="testimonial-author">
-              <img src="/api/placeholder/60/60" alt="Student Photo">
+              <img src="round4.jpg" alt="Student Photo">
               <div class="author-info">
                 <h4>David Kim</h4>
                 <p>Violin Student, 4 Months</p>
@@ -885,12 +993,12 @@
           <h2>Ready to Start Your Musical Journey?</h2>
           <p>Join thousands of students learning their favorite instruments with our expert-led courses.</p>
           <div class="cta-buttons">
-            <a href="#" class="btn-primary">Browse All Courses</a>
+            <a href="#" class="btn-primary">Need Help?</a>
             <a href="#" class="btn-secondary">Get Free Consultation</a>
           </div>
         </div>
         <div class="cta-image">
-          <img src="/api/placeholder/500/300" alt="Students playing music">
+          <img src="musical.png" alt="Students playing music">
         </div>
       </div>
     </div>
@@ -904,6 +1012,80 @@
       background: linear-gradient(135deg, #f9f9f9, #f1f1f1);
       overflow: hidden;
     }
+    /* Fix for category grid images */
+.category-icon {
+  height: 150px;
+  width:100%;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  justify-content: center;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.category-icon img {
+  max-width: 100%;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Ensure cards have enough height and don't stack improperly */
+.category-card {
+  height: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  max-height: 45px;
+}
+
+/* Ensure proper grid layout */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  width: 100%;
+  
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .category-icon {
+    height: 120px;
+  }
+  
+  .category-icon img {
+    max-height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    
+  }
+  
+  .category-card {
+    min-height: 220px;
+    
+  }
+}
+
+@media (max-width: 380px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-card {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+}
     
     .container {
       max-width: 1200px;
@@ -1374,61 +1556,211 @@
       border-radius: 10px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
+    /* Base improvements for better responsiveness */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Image responsiveness */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Improved grid responsiveness */
+.featured-courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.instructors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+/* Flexible buttons */
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Enhanced media queries */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  .cta-section {
+    max-width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 992px) {
+  .section-header h2 {
+    font-size: 2.2rem;
+  }
+  
+  .cta-content, .cta-image {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .section-header p {
+    font-size: 1rem;
+  }
+  
+  .featured-courses {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .course-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .testimonial-card {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-header {
+    margin-bottom: 40px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .course-card {
+    max-width: 100%;
     
-    /* Responsive Adjustments */
-    @media (max-width: 992px) {
-      .featured-courses {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      }
-      
-      .cta-content, .cta-image {
-        flex: 100%;
-      }
-      
-      .cta-image {
-        order: -1;
-      }
-    }
+  }
+  
+  .testimonial-author {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     
-    @media (max-width: 768px) {
-      .section-header h2 {
-        font-size: 2rem;
-      }
-      
-      .music-courses {
-        padding: 60px 0;
-      }
-      
-      .category-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      }
-      
-      .instructors-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      }
-    }
+  }
+  
+  .testimonial-author img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .cta-content {
+    padding: 30px 20px;
+  }
+  
+  .cta-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-courses {
+    padding: 40px 0;
+  }
+  
+  .section-header h2:after {
+    width: 60px;
+  }
+  
+  .course-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .category-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .instructor-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .cta-section {
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .category-grid {
+    grid-template-columns: 1fr;
     
-    @media (max-width: 576px) {
-      .featured-courses {
-        grid-template-columns: 1fr;
-      }
-      
-      .category-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .instructors-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .testimonial-slider {
-        flex-direction: column;
-      }
-      
-      .cta-content {
-        padding: 30px;
-      }
-    }
+  }
+  
+  .category-card {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+}
+
+/* Fix for flex containers */
+.testimonial-slider {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.testimonial-card {
+  flex: 1 1 300px;
+  max-width: 100%;
+}
+
+/* Fix for CTA section alignment */
+@media (max-width: 992px) {
+  .cta-section {
+    flex-direction: column;
+  }
+  
+  .cta-image, .cta-content {
+    width: 100%;
+  }
+}
+
+/* Ensure buttons don't overflow */
+.btn-primary, .btn-secondary {
+  white-space: normal;
+  word-wrap: break-word;
+}
     
 
   </style>
