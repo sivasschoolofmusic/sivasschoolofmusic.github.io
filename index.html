@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+     <!-- Basic Meta Tags -->
+     <title>Sivas' School of Music</title>
+     <meta name="title" content="Siva's School of Music">
+     <meta name="description" content="Learn the Language of Music. Explore courses and lessons to master music from experts.">
+     <meta name="keywords" content="music school, online music lessons, learn music, music classes, instrumental training,sivasschoolofmusic, music, sivasschoolof music website, music tutorial">
+     <meta name="author" content="Siva's School of Music">
+     <meta name="robots" content="index, follow">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+     <!-- Open Graph Meta Tags (for Facebook, LinkedIn, etc.) -->
+     <meta property="og:title" content="Siva's School of Music">
+     <meta property="og:description" content="Join Siva's School of Music and master the language of music!">
+     <meta property="og:url" content="https://sivasschoolofmusic.vercel.app">
+     <meta property="og:type" content="website">
+     <meta property="og:image" content="https://sivasschoolofmusic.vercel.app/facebook.png">
+ 
+     <!-- Twitter Meta Tags -->
+     <meta name="twitter:title" content="Siva's School of Music">
+     <meta name="twitter:description" content="Master music with expert-led lessons and interactive courses.">
+     <meta name="twitter:image" content="https://sivasschoolofmusic.vercel.app/twitter.png">
+     <meta name="twitter:card" content="summary_large_image">
+ 
+     <!-- Favicon -->
+     <link rel="icon" type="image/png" href="IMG_1990.PNG">
+     <link rel="apple-touch-icon" sizes="180x180" href="IMG_1990.PNG">
+     <link rel="icon" type="image/png" sizes="32x32" href="IMG_1990.PNG">
+     <link rel="icon" type="image/png" sizes="16x16" href="IMG_1990.PNG">
+     <link rel="manifest" href="IMG_1990.PNG">
+
+    <meta name="google-site-verification" content="J9W0NUrKHUSwaLhj9hZKG_m6vgYB52THUf9lK98GD0c" />
+    
+
+    
+    <script defer type="module">
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+import { 
+    getAuth, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    signInWithEmailAndPassword, 
+    RecaptchaVerifier, 
+    signInWithPhoneNumber, 
+    onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+
+// 🔥 Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAt9FCi9ojZvxN1wR_TgDQlZ46R3ffmKDA",
+  authDomain: "sivasschoolofmusic.firebaseapp.com",
+  projectId: "sivasschoolofmusic",
+  storageBucket: "sivasschoolofmusic.firebasestorage.app",
+  messagingSenderId: "205459684209",
+  appId: "1:205459684209:web:a79673b1ce20f98ec394d0",
+  measurementId: "G-FM2G13BFN5"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = 'en';
+const provider = new GoogleAuthProvider();
+let confirmationResult;
+
+// 🔹 Auto-Redirect if User is Already Logged In
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        window.location.replace("home.html");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const googleLogin = document.getElementById("google-login-btn");
+    const phoneAuthBtn = document.getElementById("phone-auth-btn");
+    const verifyOtpBtn = document.getElementById("verify-otp-btn");
+    const emailLoginBtn = document.getElementById("email-login-btn");
+    const toggleOtp = document.getElementById("toggle-otp");
+    const otpSection = document.getElementById("otp-section");
+    const emailSection = document.getElementById("email-section");
+    const errorMessage = document.getElementById("error-message");
+
+    // 🔹 Google Sign-In
+    googleLogin.addEventListener("click", function () {
+        signInWithPopup(auth, provider)
+            .then(() => { 
+                alert("✅ Google Login successful! Redirecting...");
+                window.location.replace("home.html"); 
+            })
+            .catch((error) => { 
+                console.error(error); 
+                errorMessage.textContent = " Google Login Failed!";
+            });
+    });
+
+    // 🔹 Toggle OTP Login View
+    toggleOtp.addEventListener("click", function () {
+        if (otpSection.style.display === "none") {
+            otpSection.style.display = "block";
+            emailSection.style.display = "none";
+            googleLogin.style.display = "none";
+            toggleOtp.textContent = "Login with Email";
+        } else {
+            otpSection.style.display = "none";
+            emailSection.style.display = "block";
+            googleLogin.style.display = "block";
+            toggleOtp.textContent = "Login with OTP";
+        }
+    });
+
+    // 🔹 Phone Authentication (Send OTP)
+    phoneAuthBtn.addEventListener("click", function () {
+        const phoneNumber = document.getElementById("phone-number").value.trim();
+        if (!phoneNumber) {
+            errorMessage.textContent = "⚠️ Enter a valid phone number.";
+            return;
+        }
+
+        window.recaptchaVerifier = new RecaptchaVerifier("recaptcha-container", {
+            size: "invisible",
+            callback: function () {
+                console.log("Recaptcha verified!");
+            }
+        }, auth);
+
+        signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+            .then((result) => {
+                confirmationResult = result;
+                alert("📲 OTP Sent!");
+            })
+            .catch((error) => {
+                console.error(error);
+                errorMessage.textContent = " Failed to send OTP.";
+            });
+    });
+
+    // 🔹 Verify OTP
+    verifyOtpBtn.addEventListener("click", function () {
+        const code = document.getElementById("otp-code").value.trim();
+        if (!code) {
+            errorMessage.textContent = "⚠️ Enter the OTP.";
+            return;
+        }
+
+        confirmationResult.confirm(code)
+            .then(() => { 
+                alert(" Phone Login successful! Redirecting...");
+                window.location.replace("home.html");
+            })
+            .catch(() => { 
+                errorMessage.textContent = " Invalid OTP. Please try again.";
+            });
+    });
+
+    // 🔹 Email Login
+    emailLoginBtn.addEventListener("click", function () {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (!email || !password) {
+            errorMessage.textContent = "⚠️ Enter email and password.";
+            return;
+        }
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then(() => { 
+                alert("✅ Email Login successful! Redirecting...");
+                window.location.replace("home.html");
+            })
+            .catch((error) => {
+                console.error(error);
+                if (error.code === "auth/user-not-found") {
+                    errorMessage.textContent = " No user found with this email.";
+                } else if (error.code === "auth/wrong-password") {
+                    errorMessage.textContent = " Incorrect password. Try again.";
+                } else {
+                    errorMessage.textContent = " " + error.message;
+                }
+            });
+    });
+});
+
+
+    </script>
+    
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(135deg, #ecdffa, #dec9f5,#ecdffa); 
+            padding: 20px;
+        }
+        .container { 
+            width: 900px; 
+            height: 500px; 
+            display: flex; 
+            background: white; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+            overflow: hidden; 
+        }
+        .left-section { 
+            width: 50%; 
+            background: linear-gradient(135deg, #f3fdb9, #f8ffac); 
+            color: rgb(18, 18, 18); 
+            display: flex; 
+            border-radius: 0px 200px 200px 0px;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 40px; 
+            text-align: center; 
+        }
+        .left-section h1 { font-size: 28px; margin-bottom: 15px; }
+        .left-section p { font-size: 14px; opacity: 0.9; }
+        .right-section { 
+            width: 50%; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            
+        }
+        h2 { color: #333; font-size: 24px; margin-bottom: 20px; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            font-size: 16px; 
+        }
+        .btn { 
+            width: 100%; 
+            padding: 12px; 
+            border: none; 
+            border-radius: 5px; 
+            background: linear-gradient(90deg, #6a11cb, #2575fc); 
+            color: white; 
+            font-size: 16px; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+        .btn:hover { background: linear-gradient(90deg, #2575fc, #6a11cb); }
+        .google-btn { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            background:linear-gradient(90deg, #6a11cb, #2575fc); 
+            color: rgb(255, 255, 255); 
+            font-weight: bold; 
+            border: 1px solid #ddd; 
+            margin-top: 10px; 
+        }
+        .google-btn img { width: 20px; height: 20px; }
+        .toggle-text { 
+            cursor: pointer; 
+            color: #6a11cb; 
+            text-decoration: none; 
+            margin-top: 10px; 
+            display: inline-block; 
+        }
+        .toggle-text:hover { text-decoration: underline; }
+        #otp-section { display: none; width: 100%; }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .container {
+                width: 90%;
+                height: auto;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .left-section, .right-section {
+                width: 100%;
+                padding: 30px;
+            }
+            .left-section {
+                border-radius: 10px 10px 0 0;
+            }
+            .right-section {
+                border-radius: 0 0 10px 10px;
+            }
+        }
+       
+        .left-section { 
+            width: 50%; 
+            background: linear-gradient(135deg, #f3fdb9, #f8ffac); 
+            color: rgb(18, 18, 18); 
+            display: flex; 
+            border-radius: 0px 200px 200px 0px;
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 40px; 
+            text-align: center; 
+        }
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        .top-left-image {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 180px; /* Adjust as needed */
+    height: auto;
+    cursor: pointer;
+}
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            background: #6a11cb;
+        }
+        .social-icons img {
+            width: 35px;
+            height: 35px;
+        }
+        .social-icons a {
+    outline: none; /* Removes the default focus outline */
+    border: none; /* Ensures no border appears */
+}
+
+.social-icons a:focus {
+    outline: none;
+    box-shadow: none; /* Prevents any glow or box appearing */
+}
+
+
+        /* Responsive Design */
+@media (max-width: 900px) {
+    .container {
+        width: 90%;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .left-section, .right-section {
+        width: 100%;
+        padding: 30px;
+    }
+    .left-section {
+        border-radius: 10px 10px 0 0;
+    }
+    .right-section {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    body { padding: 10px; }
+    .container { width: 100%; }
+    .left-section {
+        padding: 20px;
+        border-radius: 0;
+    }
+    .left-section h1 { font-size: 24px; }
+    .right-section { padding: 20px; }
+    input, .btn { font-size: 14px; padding: 10px; }
+}
+
+@media (max-width: 400px) {
+    .left-section h1 { font-size: 20px; }
+    .left-section p { font-size: 12px; }
+    .right-section { padding: 15px; }
+    input, .btn { font-size: 12px; padding: 8px; }
+    .social-icons a { width: 30px; height: 30px; }
+    .social-icons img { width: 25px; height: 25px; }
+}
+@media (max-width: 900px) {
+    .container {
+        width: 90%;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .left-section, .right-section {
+        width: 100%;
+        padding: 30px;
+    }
+    .left-section {
+        border-radius: 0px 0px 100px 100px; /* Moves the curve downward */
+    }
+    .right-section {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    body { padding: 10px; }
+    .container { width: 100%; }
+    .left-section h1 { font-size: 24px; }
+    .right-section { padding: 20px; }
+    input, .btn { font-size: 14px; padding: 10px; }
+    .left-section {
+        border-radius: 0px 0px 150px 150px; /* Adjust for even smaller screens */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Left Side -->
+        <div class="left-section">
+            <h1>Shiva's School Of Music</h1>
+            <p>Learn The Language Of Music🎵</p><br>
+            <h3>Follow Us On:</h3>
+            <div class="social-icons">
+                <a href="#"><img src="facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="youtube.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <!-- Right Side (Login Form) -->
+        <div class="right-section">
+            <h2>User Login</h2>
+
+            <!-- Email Login Section -->
+            <div id="email-section">
+                <input type="email" id="email" placeholder="Enter Email" required>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <button class="btn" id="email-login-btn">Login with Email</button>
+            </div>
+
+            <!-- Google Login Button -->
+            <button class="btn google-btn" id="google-login-btn">
+                <img src="google.png" alt="Google"> <strong>Login with Google</strong>
+            </button>
+
+            <!-- Toggle Text -->
+            <p class="toggle-text" id="toggle-otp">Login with OTP</p>
+
+            <!-- OTP Login Section (Hidden Initially) -->
+            <div id="otp-section">
+                <input type="tel" id="phone-number" placeholder="Phone Number (with country code)" required>
+                <div id="recaptcha-container"></div>
+                <button class="btn" id="phone-auth-btn">Send OTP</button>
+                <input type="text" id="otp-code" placeholder="Enter OTP" required>
+                <button class="btn" id="verify-otp-btn">Verify OTP</button>
+            </div>
+
+            <p id="error-message" style="color: red; margin-top: 10px;"></p>
+        </div>
+    </div>
+    
+</body>
+</html>

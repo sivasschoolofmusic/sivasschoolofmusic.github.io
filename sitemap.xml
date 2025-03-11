@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Main Pages -->
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/about</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/courses</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/contact</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Course Pages -->
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/courses/guitar</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/courses/piano</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/courses/violin</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/courses/vocals</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Pages -->
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/blog</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/blog/music-theory</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/blog/practice-tips</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Extra Pages -->
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/testimonials</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/gallery</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://sivasschoolofmusic.vercel.app/faq</loc>
+        <lastmod>2025-03-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+</urlset>

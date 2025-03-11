@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivas' School Of Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #3a47d5, #ff44d7);
+            border-bottom: 5px solid #f0c929;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger-menu {
+            width: 30px;
+            height: 35px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .hamburger-menu:hover {
+            transform: rotate(2deg);
+        }
+
+        .logo-container {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            padding-right: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        /* Right Section Styles */
+        .right-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dropdown Menu Styles */
+        .menu-dropdown {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .menu-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #3a47d5;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-button:after {
+            content: "";
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #3a47d5;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button.active:after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f5f9;
+            color: #3a47d5;
+            padding-left: 20px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 8px 0;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background: linear-gradient(45deg, #3a47d5, #00d2ff);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Initially hidden */
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+    transition: left 0.6s ease-out, opacity 0.4s ease-in, transform 0.6s ease-out;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(-30px); /* Starts slightly left for a smoother effect */
+}
+
+/* Active State - Sidebar Appears */
+.sidebar.active {
+    left: 0;
+    opacity: 1;
+    transform: translateX(0); /* Moves naturally into place */
+}
+
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-button:hover {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-logo {
+            width: 100%;
+            margin: 10px auto 30px;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            margin-left: 20px;
+        }
+
+        .sidebar-logo img {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .sidebar-menu-item:hover {
+            background-color: #a8cdf3;
+            color: #3a47d5;
+        }
+
+        .sidebar-menu-item img {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar hr {
+            height: 1px;
+            background: #e5e7eb;
+            border: none;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .social-container {
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        .social-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon.facebook {
+            background: #1877f2;
+        }
+
+        .social-icon.twitter {
+            background: #1da1f2;
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icon.linkedin {
+            background: #0077b5;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+          /* Responsive Styles */
+          @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                width: 350px;
+                max-height: 400px;
+            }
+
+            .card-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .search-container {
+                max-width: 300px;
+            }
+
+            .sidebar {
+                width: 250px;
+                left: -250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 200px;
+                margin: 0 10px;
+            }
+            
+            .menu-button span {
+                display: none;
+            }
+            
+            .login-button {
+                display: none;
+            }
+            
+            .logo-container {
+                width: 40px;
+                height: 40px;
+            }
+
+            .sidebar {
+                width: 230px;
+                left: -230px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 10px 15px;
+            }
+            
+            .search-container {
+                max-width: 150px;
+            }
+            
+            .hamburger-menu {
+                margin-right: 10px;
+                width: 25px;
+                height: 25px;
+            }
+            
+            .main-content {
+                padding: 30px 15px;
+            }
+            
+            .sidebar {
+                width: 200px;
+                left: -200px;
+                padding: 15px;
+            }
+
+            .sidebar-menu-item {
+                padding: 10px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                max-width: 120px;
+            }
+            
+            .menu-dropdown {
+                margin-right: 5px;
+            }
+            
+            .menu-button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="left-section">
+            <img src="ham.png" alt="Menu" class="hamburger-menu" id="hamburger-menu">
+            <div class="logo-container">
+                <img src="IMG_1990.PNG" alt="Music School Logo" id="company-logo">
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <img src="search.png" alt="Search" class="search-icon">
+        </div>
+        
+        <div class="right-section">
+            <div class="menu-dropdown">
+                <button class="menu-button" id="menu-button">Menu</button>
+                <div class="dropdown-content" id="dropdown-menu">
+                    <a href="#aboutus">About Us</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#branches">Branches</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Need Help?</a>
+                    <a href="$">explore Classes</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Youtube</a>
+                </div>
+            </div>
+            <button class="login-button">Login</button>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <img src="close.png" alt="Close" class="close-button" id="close-button">
+        <div class="sidebar-logo">
+            <img src="IMG_1990.PNG" alt="Music School Logo" id="sidebar-logo">
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="home.png" alt="Home"> Home
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="classes.png" alt="Classes"> Music Classes
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="teachers.png" alt="Teachers"> Our Teachers
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="instruemtns.png" alt="Instruments"> Instruments
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="shedule.png" alt="Schedule"> Class Schedule
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="upcoming events.png" alt="Events"> Upcoming Events
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="about us.png" alt="About"> About Us
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="contactus.png" alt="Contact"> Contact
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="faq.png" alt="FAQ"> FAQ
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="enroll.png" alt="Enroll"> Enroll Now
+                </a>
+            </li>
+        </ul>
+        
+        <div class="social-container">
+            <p class="social-title">Follow us on</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Music School. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    <!-- Music Instrument Courses Section -->
+<section class="music-courses">
+    <div class="container">
+      <div class="section-header animate-in">
+        <h2>Available Music Instrument Courses</h2>
+        <p>Master your favorite instrument with our expert instructors</p>
+      </div>
+      
+      <!-- Featured Courses -->
+      <div class="featured-courses">
+        <!-- Guitar Course -->
+        <div class="course-card animate-in">
+          <div class="course-image">
+            <img src="guitarclass.jpg" alt="Guitar Course">
+            <div class="course-badge">Most Popular</div>
+          </div>
+          <div class="course-content">
+            <h3>Guitar Classes</h3>
+            <div class="course-meta">
+              <span><i class="level-icon">🎚️</i> Trinity Certificate</span>
+              <span><i class="duration-icon">⏱️</i>Weekly two classes</span>
+            </div>
+            <p>Learn guitar from a master teacher with expert guidance! Our classes run twice a week for one hour.</p>
+            <div class="course-details">
+              <div class="course-detail">
+                <i class="detail-icon">👨‍🏫</i>
+                <span>2 Expert Instructors</span>
+              </div>
+              <div class="course-detail">
+                <i class="detail-icon">📚</i>
+                <span>24 Lessons</span>
+              </div>
+              <div class="course-detail">
+                <i class="detail-icon">🏆</i>
+                <span>Certificate Included</span>
+              </div>
+            </div>
+            <a href="#" class="btn-primary">Join Now</a>
+          </div>
+        </div>
+        
+        <!-- Piano Course -->
+        <div class="course-card animate-in">
+          <div class="course-image">
+            <img src="pianoandkeyboard.jpg" alt="Piano Course">
+            <div class="course-badge">Most Popular</div>
+          </div>
+          <div class="course-content">
+            <h3>Piano & Keyboard Classes</h3>
+            <div class="course-meta">
+              <span><i class="level-icon">🎚️</i> Trinity Certificate</span>
+              <span><i class="duration-icon">⏱️</i> 16 Weeks</span>
+            </div>
+            <p>From basic notes to complex compositions, develop your skills with personalized guidance.</p>
+            <div class="course-details">
+              <div class="course-detail">
+                <i class="detail-icon">👨‍🏫</i>
+                <span>3 Expert Instructors</span>
+              </div>
+              <div class="course-detail">
+                <i class="detail-icon">📚</i>
+                <span>32 Lessons</span>
+              </div>
+              <div class="course-detail">
+                <i class="detail-icon">🏆</i>
+                <span>Certificate Included</span>
+              </div>
+            </div>
+            <a href="#" class="btn-primary">join Now</a>
+          </div>
+        </div>
+        
+        <!-- Drums Course -->
+<div class="course-card animate-in">
+    <div class="course-image">
+      <img src="drums.jpg" alt="Drums Course" style="max-height: 200px;">
+      <div class="course-badge">Hot</div>
+    </div>
+    <div class="course-content">
+      <h3>Drums Classes</h3>
+      <div class="course-meta">
+        <span><i class="level-icon">🎚️</i>Trinity Certificate</span>
+        <span><i class="duration-icon">⏱️</i> Weekly two classes</span>
+      </div>
+      <p>Master rhythm, coordination, and drumming techniques across various styles, from rock to jazz.</p>
+      <div class="course-details">
+        <div class="course-detail">
+          <i class="detail-icon">👨‍🏫</i>
+          <span>1 Master Drummer</span>
+        </div>
+        <div class="course-detail">
+          <i class="detail-icon">🥁</i>
+          <span>24 Interactive Lessons</span>
+        </div>
+        <div class="course-detail">
+          <i class="detail-icon">🏆</i>
+          <span>Certificate of Completion</span>
+        </div>
+      </div>
+      <a href="#" class="btn-primary">Join Now</a>
+    </div>
+  </div>
+  </div>
+        </div>
+      </div>
+      
+      <!-- Course Categories -->
+      <div class="course-categories animate-in">
+        <h3>Available Courses</h3>
+        <div class="category-grid">
+          <a href="#" class="category-card">
+            <div class="category-icon">🎸</div>
+            <h4>Guitar Classes</h4>
+            <p>Expert, passionate, engaging, skilled, dedicated.</p>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🎹</div>
+            <h4>Keyboard Classes</h4>
+            <p>Expert, passionate, engaging, skilled, inspiring.</p>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🥁</div>
+            <h4>Drums Classes</h4>
+            <p>Dynamic, energetic, rhythmic, skilled, motivating.</p>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🎷</div>
+            <h4>Vocal Classes</h4>
+            <p>Find your voice, master the melody, and sing with confidence!</p>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🎺</div>
+            <h4>Piano Classes</h4>
+            <p>Let your fingers dance, master the keys, and play with passion!</p>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">🎤</div>
+            <h4>Vocal Training</h4>
+            <p>Classical, Pop, Jazz</p>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Instructor Spotlight -->
+      <div class="instructor-spotlight animate-in">
+        <h3>Meet Our Top Instructors</h3>
+        <div class="instructors-grid">
+          <div class="instructor-card">
+            <div class="instructor-image">
+              <img src="/api/placeholder/200/200" alt="Instructor Sarah">
+            </div>
+            <h4>Sarah Johnson</h4>
+            <p class="instructor-title">Piano & Keyboard Expert</p>
+            <p class="instructor-bio">Concert pianist with 15+ years of teaching experience</p>
+            <div class="instructor-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">4.9 (127 reviews)</span>
+            </div>
+          </div>
+          <div class="instructor-card">
+            <div class="instructor-image">
+              <img src="/api/placeholder/200/200" alt="Instructor Michael">
+            </div>
+            <h4>Michael Rodriguez</h4>
+            <p class="instructor-title">Guitar Virtuoso</p>
+            <p class="instructor-bio">Professional guitarist and composer for 20+ years</p>
+            <div class="instructor-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">4.8 (203 reviews)</span>
+            </div>
+          </div>
+          <div class="instructor-card">
+            <div class="instructor-image">
+              <img src="/api/placeholder/200/200" alt="Instructor Emma">
+            </div>
+            <h4>Emma Chen</h4>
+            <p class="instructor-title">Violin & String Specialist</p>
+            <p class="instructor-bio">Classical violinist with conservatory training</p>
+            <div class="instructor-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">4.9 (156 reviews)</span>
+            </div>
+          </div>
+          <div class="instructor-card">
+            <div class="instructor-image">
+              <img src="/api/placeholder/200/200" alt="Instructor James">
+            </div>
+            <h4>James Wilson</h4>
+            <p class="instructor-title">Percussion Expert</p>
+            <p class="instructor-bio">Session drummer with touring experience</p>
+            <div class="instructor-rating">
+              <span class="stars">★★★★★</span>
+              <span class="count">4.7 (98 reviews)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Testimonials -->
+      <div class="testimonials animate-in">
+        <h3>What Our Students Say</h3>
+        <div class="testimonial-slider">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>"I never thought I could learn piano at my age, but after 8 weeks in Sarah's class, I'm playing songs I've always dreamed of!"</p>
+            </div>
+            <div class="testimonial-author">
+              <img src="/api/placeholder/60/60" alt="Student Photo">
+              <div class="author-info">
+                <h4>Robert Williams</h4>
+                <p>Piano Student, 3 Months</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>"The guitar course exceeded all my expectations. Michael is patient, knowledgeable, and makes learning fun. I'm now playing in a local band!"</p>
+            </div>
+            <div class="testimonial-author">
+              <img src="/api/placeholder/60/60" alt="Student Photo">
+              <div class="author-info">
+                <h4>Jennifer Lopez</h4>
+                <p>Guitar Student, 6 Months</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>"Emma's violin lessons have transformed my playing. Her technique tips and personalized feedback have helped me improve rapidly."</p>
+            </div>
+            <div class="testimonial-author">
+              <img src="/api/placeholder/60/60" alt="Student Photo">
+              <div class="author-info">
+                <h4>David Kim</h4>
+                <p>Violin Student, 4 Months</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CTA Section -->
+      <div class="cta-section animate-in">
+        <div class="cta-content">
+          <h2>Ready to Start Your Musical Journey?</h2>
+          <p>Join thousands of students learning their favorite instruments with our expert-led courses.</p>
+          <div class="cta-buttons">
+            <a href="#" class="btn-primary">Browse All Courses</a>
+            <a href="#" class="btn-secondary">Get Free Consultation</a>
+          </div>
+        </div>
+        <div class="cta-image">
+          <img src="/api/placeholder/500/300" alt="Students playing music">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CSS Styles for Music Courses Section -->
+  <style>
+    /* Main Container Styles */
+    .music-courses {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f9f9f9, #f1f1f1);
+      overflow: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Section Header */
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-header h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #3498db, #2c3e50);
+    }
+    
+    .section-header p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Animation for Elements */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+    
+    .animate-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Featured Courses */
+    .featured-courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 70px;
+    }
+    
+    .course-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .course-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .course-image {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .course-image img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+    
+    .course-card:hover .course-image img {
+      transform: scale(1.05);
+    }
+    
+    .course-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #e74c3c;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .course-content {
+      padding: 25px;
+    }
+    
+    .course-content h3 {
+      margin: 0 0 15px;
+      font-size: 1.4rem;
+      color: #2c3e50;
+    }
+    
+    .course-meta {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    
+    .course-meta span {
+      display: flex;
+      align-items: center;
+    }
+    
+    .course-meta i {
+      margin-right: 5px;
+    }
+    
+    .course-content p {
+      margin: 0 0 20px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .course-details {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .course-detail {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .course-detail:last-child {
+      margin-bottom: 0;
+    }
+    
+    .detail-icon {
+      margin-right: 10px;
+      color: #3498db;
+    }
+    
+    .btn-primary {
+      display: block;
+      text-align: center;
+      background: linear-gradient(135deg, #3445db, #e956c9);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 600;
+      max-width: 200px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+    
+    .btn-primary:hover:before {
+      left: 100%;
+    }
+    
+    /* Course Categories */
+    .course-categories {
+    margin-bottom: 70px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures content stays centered */
+}
+    
+    .course-categories h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      color: #2c3e50;
+    }
+    
+    .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    justify-content: center; /* Centers the grid within its container */
+    max-width: 1200px; /* Optional: Adjust width for better alignment */
+}
+    
+    .category-card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px 15px;
+      text-align: center;
+      margin: 20px auto;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .category-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .category-card h4 {
+      color: #2c3e50;
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+    
+    .category-card p {
+      color: #777;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    /* Instructor Section */
+    .instructor-spotlight {
+    margin-bottom: 70px;
+    text-align: center; /* Ensures the heading is centered */
+}
+    .instructor-spotlight h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      color: #2c3e50;
+    }
+    
+    .instructors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    justify-content: center; /* Centers the grid items */
+    max-width: 1200px; /* Optional: Adjust width for better alignment */
+    margin: 0 auto; /* Ensures the whole section is centered */
+}
+
+    
+    .instructor-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .instructor-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .instructor-image {
+      width: 130px;
+      height: 130px;
+      margin: 25px auto 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #f0f0f0;
+    }
+    
+    .instructor-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .instructor-card h4 {
+      margin: 0 0 5px;
+      color: #2c3e50;
+      font-size: 1.2rem;
+    }
+    
+    .instructor-title {
+      color: #3498db;
+      font-weight: 600;
+      margin: 0 0 10px;
+      font-size: 0.9rem;
+    }
+    
+    .instructor-bio {
+      color: #666;
+      padding: 0 20px;
+      margin: 0 0 15px;
+      font-size: 0.9rem;
+    }
+    
+    .instructor-rating {
+      background: #f8f9fa;
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .stars {
+      color: #f1c40f;
+      margin-right: 5px;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      margin-bottom: 70px;
+    }
+    
+    .testimonials h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      color: #2c3e50;
+    }
+    
+    .testimonial-slider {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .testimonial-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+    }
+    
+    .testimonial-card:before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(52, 152, 219, 0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
+      z-index: 0;
+    }
+    
+    .testimonial-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .testimonial-content p {
+      color: #555;
+      font-style: italic;
+      line-height: 1.6;
+      margin: 0 0 20px;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .testimonial-author img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    
+    .author-info h4 {
+      margin: 0 0 5px;
+      color: #2c3e50;
+      font-size: 1.1rem;
+    }
+    
+    .author-info p {
+      margin: 0;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+
+    /* Center Horizontally */
+    margin: 20px auto; /* This centers it horizontally */
+}
+
+    
+    .cta-content {
+      flex: 1;
+      min-width: 300px;
+      padding: 50px;
+      color: white;
+    }
+    
+    .cta-content h2 {
+      margin: 0 0 20px;
+      font-size: 2rem;
+    }
+    
+    .cta-content p {
+      margin: 0 0 30px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-secondary {
+      display: inline-block;
+      padding: 12px 20px;
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: white;
+      color: #3498db;
+    }
+    
+    .cta-image {
+      flex: 1;
+      min-width: 300px;
+      padding: 30px;
+    }
+    
+    .cta-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .featured-courses {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      
+      .cta-content, .cta-image {
+        flex: 100%;
+      }
+      
+      .cta-image {
+        order: -1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .section-header h2 {
+        font-size: 2rem;
+      }
+      
+      .music-courses {
+        padding: 60px 0;
+      }
+      
+      .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .instructors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .featured-courses {
+        grid-template-columns: 1fr;
+      }
+      
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .instructors-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonial-slider {
+        flex-direction: column;
+      }
+      
+      .cta-content {
+        padding: 30px;
+      }
+    }
+    
+
+  </style>
+  
+  <!-- Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.animate-in');
+      
+      function checkVisibility() {
+        animatedElements.forEach(element => {
+          const elementPosition = element.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          if (elementPosition.top < windowHeight * 0.9) {
+            setTimeout(() => {
+              element.classList.add('show');
+            }, 100 * (Array.from(animatedElements).indexOf(element) % 5)); // Staggered animation
+          }
+        });
+      }
+      
+      // Check on load
+      checkVisibility();
+      
+      // Check on scroll
+      window.addEventListener('scroll', checkVisibility);
+    });
+  </script>
+    
+    <script>
+        // Toggle sidebar
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        });
+        
+        document.getElementById('close-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        // Toggle dropdown menu
+        document.getElementById('menu-button').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('dropdown-menu').classList.toggle('active');
+        });
+        
+        // Close dropdown menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown-menu');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+                menuButton.classList.remove('active');
+            }
+        });
+        
+        // Animation for content sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section, .hero-section, .branches-section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Check visibility on load
+            checkVisibility();
+            
+            // Check visibility on scroll
+            window.addEventListener('scroll', checkVisibility);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+});
+
+    </script></body></html>

@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivas' School Of Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #3a47d5, #ff44d7);
+            border-bottom: 5px solid #f0c929;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger-menu {
+            width: 30px;
+            height: 35px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .hamburger-menu:hover {
+            transform: rotate(2deg);
+        }
+
+        .logo-container {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            padding-right: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        /* Right Section Styles */
+        .right-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dropdown Menu Styles */
+        .menu-dropdown {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .menu-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #3a47d5;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-button:after {
+            content: "";
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #3a47d5;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button.active:after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f5f9;
+            color: #3a47d5;
+            padding-left: 20px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 8px 0;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background: linear-gradient(45deg, #3a47d5, #00d2ff);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Initially hidden */
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+    transition: left 0.6s ease-out, opacity 0.4s ease-in, transform 0.6s ease-out;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(-30px); /* Starts slightly left for a smoother effect */
+}
+
+/* Active State - Sidebar Appears */
+.sidebar.active {
+    left: 0;
+    opacity: 1;
+    transform: translateX(0); /* Moves naturally into place */
+}
+
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-button:hover {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-logo {
+            width: 100%;
+            margin: 10px auto 30px;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            margin-left: 20px;
+        }
+
+        .sidebar-logo img {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .sidebar-menu-item:hover {
+            background-color: #a8cdf3;
+            color: #3a47d5;
+        }
+
+        .sidebar-menu-item img {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar hr {
+            height: 1px;
+            background: #e5e7eb;
+            border: none;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .social-container {
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        .social-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon.facebook {
+            background: #1877f2;
+        }
+
+        .social-icon.twitter {
+            background: #1da1f2;
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icon.linkedin {
+            background: #0077b5;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Content Cards */
+        .content-section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #3a47d5, #00d2ff);
+            border-radius: 3px;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #3a47d5, #00d2ff);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            
+            gap: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .hero-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button {
+            background: linear-gradient(45deg, #3a47d5, #00d2ff);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .secondary-button {
+            background: white;
+            color: #3a47d5;
+            border: 1px solid #3a47d5;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 500px;
+            border-radius: 100px 15px 100px 100px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Slideshow styles */
+.slideshow-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Navigation dots */
+.dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: white;
+}
+
+/* Navigation arrows */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+        /* Branches section styles */
+        .branches-section {
+            margin-top: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .branches-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                width: 350px;
+                max-height: 400px;
+            }
+
+            .card-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .search-container {
+                max-width: 300px;
+            }
+
+            .sidebar {
+                width: 250px;
+                left: -250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 200px;
+                margin: 0 10px;
+            }
+            
+            .menu-button span {
+                display: none;
+            }
+            
+            .login-button {
+                display: none;
+            }
+            
+            .logo-container {
+                width: 40px;
+                height: 40px;
+            }
+
+            .sidebar {
+                width: 230px;
+                left: -230px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 10px 15px;
+            }
+            
+            .search-container {
+                max-width: 150px;
+            }
+            
+            .hamburger-menu {
+                margin-right: 10px;
+                width: 25px;
+                height: 25px;
+            }
+            
+            .main-content {
+                padding: 30px 15px;
+            }
+            
+            .sidebar {
+                width: 200px;
+                left: -200px;
+                padding: 15px;
+            }
+
+            .sidebar-menu-item {
+                padding: 10px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                max-width: 120px;
+            }
+            
+            .menu-dropdown {
+                margin-right: 5px;
+            }
+            
+            .menu-button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+        }
+        @media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+    }
+    
+    .hero-content, .hero-image {
+        width: 100%;
+    }
+    
+    .hero-image {
+        margin-top: 2rem;
+    }
+    
+    .slideshow-container {
+        height: 300px; /* Shorter height on mobile */
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-button {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .prev, .next {
+        padding: 8px 12px;
+        font-size: 1.2rem;
+    }
+    
+    .dots-container {
+        bottom: 10px;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+@media (max-width: 1020px) and (min-width: 779px) {
+    .hero-section {
+        padding: 1.5rem;
+    }
+    
+    .hero-content, .hero-image {
+        flex: 0 0 48%; /* Make them nearly equal width with a bit of space */
+    }
+    
+    .hero-image {
+        height: 350px; /* Fixed height for this screen range */
+    }
+    
+    .slideshow-container {
+        height: 100%;
+        max-height: 350px;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    /* Ensure images are visible by maintaining aspect ratio */
+    .slide img {
+        object-position: center;
+        max-height: 350px;
+    }
+}
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .slideshow-container {
+        height: 250px; /* Even shorter on very small screens */
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="left-section">
+            <img src="ham.png" alt="Menu" class="hamburger-menu" id="hamburger-menu">
+            <div class="logo-container">
+                <img src="IMG_1990.PNG" alt="Music School Logo" id="company-logo">
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <img src="search.png" alt="Search" class="search-icon">
+        </div>
+        
+        <div class="right-section">
+            <div class="menu-dropdown">
+                <button class="menu-button" id="menu-button">Menu</button>
+                <div class="dropdown-content" id="dropdown-menu">
+                    <a href="#aboutus">About Us</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#branches">Branches</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Need Help?</a>
+                    <a href="classes.html">explore Classes</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Youtube</a>
+                </div>
+            </div>
+            <button class="login-button">Login</button>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <img src="close.png" alt="Close" class="close-button" id="close-button">
+        <div class="sidebar-logo">
+            <img src="IMG_1990.PNG" alt="Music School Logo" id="sidebar-logo">
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="home.png" alt="Home"> Home
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="classes.html" alt="Classes"> Music Classes
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="teachers.png" alt="Teachers"> Our Teachers
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="instruemtns.png" alt="Instruments"> Instruments
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="shedule.png" alt="Schedule"> Class Schedule
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="upcoming events.png" alt="Events"> Upcoming Events
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="about us.png" alt="About"> About Us
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="contactus.png" alt="Contact"> Contact
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="faq.png" alt="FAQ"> FAQ
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="enroll.png" alt="Enroll"> Enroll Now
+                </a>
+            </li>
+        </ul>
+        
+        <div class="social-container">
+            <p class="social-title">Follow us on</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Music School. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome To</h1>
+                <h1 style="color: #3a47d5; ">
+                    Shivas' <span style="color: rgb(241, 32, 196);">School Of Music</span>
+                </h1>
+                
+                <p class="hero-subtitle">Discover the joy of music with our expert instructors and comprehensive programs for all ages and skill levels.</p>
+                <div class="hero-buttons">
+                    <button class="hero-button primary-button">Book for a visit</button>
+                    <button class="hero-button secondary-button">Explore Classes</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="slideshow-container">
+                    <!-- Slides with placeholder images -->
+                    <div class="slide active">
+                        <img src="main2.jpeg" alt="Music School Image 1">
+                    </div>
+                    <div class="slide">
+                        <img src="siva2.jpg" alt="Music School Image 2">
+                    </div>
+                    <div class="slide">
+                        <img src="siva3.jpg" alt="Music School Image 3">
+                    </div>
+                    <div class="slide">
+                        <img src="siva4.jpg" alt="Music School Image 4">
+                    </div>
+                    
+                    
+                    <!-- Navigation buttons -->
+                    <button class="prev">&#10094;</button>
+                    <button class="next">&#10095;</button>
+                    
+                    <!-- Navigation dots -->
+                    <div class="dots-container">
+                        <div class="dot active" onclick="currentSlide(0)"></div>
+                        <div class="dot" onclick="currentSlide(1)"></div>
+                        <div class="dot" onclick="currentSlide(2)"></div>
+                        <div class="dot" onclick="currentSlide(3)"></div>
+                        <div class="dot" onclick="currentSlide(4)"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Experienced Teachers Section -->
+        <section class="content-section">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="trinity.jpg" alt="Expert Instruction">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title"> Internationally Recognized Certification</h3>
+                        <p class="card-text"> We offer Trinity College London-certified courses, giving students globally recognized music qualifications to enhance their skills and career opportunities. 🎵</p>
+                        <a href="#" class="card-button">Our Faculty</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="learn.png" alt="Personalized Learning">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Personalized Learning</h3>
+                        <p class="card-text">We tailor our teaching approach to your unique goals and learning style, with customized lesson plans that adapt as you progress.</p>
+                        <a href="#" class="card-button">Our Approach</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <img src="performance.jpg" alt="Performance Opportunities">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Performance Opportunities</h3>
+                        <p class="card-text">Regular recitals, community events, and collaborative workshops give students of all levels the chance to build confidence and showcase their skills.</p>
+                        <a href="#" class="card-button">Upcoming Events</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About Us Section -->
+<section class="about-us-section content-section" id="aboutus">
+    <div class="section-container left-image">
+        <div class="section-image">
+            <img src="team.jpg" alt="About Sivas' School of Music">
+        </div>
+        <div class="section-content">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-text">
+                Sivas' School of Music was founded in 2010 with a vision to create a nurturing environment where students of all ages and abilities can discover their musical potential. For over 15 years, we have been committed to providing high-quality music education that balances technical proficiency with creative expression.
+            </p>
+            <p class="section-text">
+                Our school is built on the belief that music education goes beyond learning notes and techniques; it's about developing discipline, boosting confidence, and fostering a lifelong appreciation for the arts. We take pride in our inclusive approach, welcoming students from diverse backgrounds and with varying musical interests.
+            </p>
+            <p class="section-text">
+                What sets us apart is our team of dedicated instructors who are not only accomplished musicians but also passionate educators. They bring their real-world performance experience into the classroom, offering students valuable insights into the music industry while nurturing their individual talents.
+            </p>
+            <p class="section-text">
+                Whether you're taking your first steps in music or looking to refine advanced skills, Sivas' School of Music provides the guidance, resources, and supportive community to help you achieve your musical goals.
+            </p>
+            <a href="#" class="section-button">Learn More About Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- Our Branches Section -->
+<section class="branches-detail-section content-section" id="branches">
+    <div class="section-container right-image">
+        <div class="section-content">
+            <h2 class="section-title">Our Branches</h2>
+            <h3 class="subsection-title">Main City Center Branch</h3>
+            <p class="section-text">
+                Located in the heart of downtown, our main branch offers state-of-the-art facilities including soundproofed practice rooms, recording studios, and a 150-seat recital hall. This location hosts our full range of programs, from early childhood music education to advanced instrumental and vocal training. With convenient access to public transportation and nearby parking, our city center location serves students from across the metropolitan area.
+            </p>
+            <h3 class="subsection-title">Westside Neighborhood Branch</h3>
+            <p class="section-text">
+                Our Westside branch provides a welcoming, community-focused environment perfect for families and students of all ages. Established in 2018, this location features comfortable teaching spaces, a dedicated percussion room, and a cozy performance area for student recitals and community events. The Westside branch specializes in beginner and intermediate instruction, with a strong focus on youth programs and group classes that foster musical collaboration.
+            </p>
+            <a href="#" class="section-button">Visit Our Locations</a>
+        </div>
+        <div class="section-image">
+            <img src="brances.png" alt="Our Branch Locations">
+        </div>
+    </div>
+    <section class="branches-section content-section">
+       
+        <div class="card-container">
+            <div class="card">
+                <div class="card-image">
+                    <img src="mainbranch.jpg" alt="Downtown Branch">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Branch1</h3>
+                    <p class="card-text">Our main facility featuring state-of-the-art practice rooms, recording studios, and performance spaces.</p>
+                    <a href="#" class="card-button">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image">
+                    <img src="lawsepet.jpg" alt="Westside Branch">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Westside Branch</h3>
+                    <p class="card-text">A convenient location for families in the western suburbs with excellent facilities for beginners to advanced students.</p>
+                    <a href="#" class="card-button">Know more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<!-- Our Teaching Philosophy Section -->
+<section class="teaching-section content-section">
+    <div class="section-container left-image">
+        <div class="section-image">
+            <img src="teaching.png" alt="Our Teaching Philosophy">
+        </div>
+        <div class="section-content">
+            <h2 class="section-title">Our Teaching Philosophy</h2>
+            <p class="section-text">
+                At Sivas' School of Music, we believe that effective music education combines technical mastery with creative expression and emotional connection. Our teaching philosophy is built on four core principles that guide all our programs.
+            </p>
+            <p class="section-text">
+                First, we emphasize personalized learning, recognizing that each student has unique strengths, challenges, and goals. Our instructors create customized lesson plans that adapt to individual learning styles and evolve as students progress.
+            </p>
+            <p class="section-text">
+                Second, we take a holistic approach to music education, incorporating theory, ear training, composition, and performance skills into our curriculum. We believe that understanding the "why" behind music is just as important as the "how."
+            </p>
+            <p class="section-text">
+                Third, we foster a supportive community where students can learn from each other and grow through collaboration. Regular performance opportunities help students build confidence while developing their musical identity.
+            </p>
+            <p class="section-text">
+                Finally, we instill a lifelong love of music by making learning enjoyable and relevant to each student's interests, whether they aspire to become professional musicians or simply wish to enrich their lives through music.
+            </p>
+            <a href="#" class="section-button">Our Curriculum</a>
+        </div>
+    </div>
+</section>
+
+<!-- Our Certificates Section -->
+<section class="certificates-section content-section" id="certificates">
+    <div class="section-container right-image">
+        <div class="section-content">
+            <h2 class="section-title">Our Certificates</h2>
+            <p class="section-text">
+                Sivas' School of Music is proud to be an official examination center for Trinity College London, offering students the opportunity to earn internationally recognized music qualifications. These certifications provide a structured framework for progression while validating students' achievements at every stage of their musical journey.
+            </p>
+            <p class="section-text">
+                Our Trinity-certified courses cover a wide range of instruments and vocal styles, from classical to contemporary. Students benefit from a comprehensive curriculum that develops technical proficiency, musicality, and performance skills. Examinations are conducted by external assessors from Trinity College, ensuring objective evaluation and maintaining high standards.
+            </p>
+            <p class="section-text">
+                Beyond formal qualifications, we also offer our own internal certification programs designed to celebrate milestones and motivate continued learning. These certificates recognize not only technical achievements but also progress in areas such as musicianship, ensemble participation, and creative expression.
+            </p>
+            <p class="section-text">
+                Whether pursuing music professionally or for personal enrichment, our certification options provide valuable credentials that are respected by educational institutions and employers worldwide. Our instructors guide students through preparation for these examinations, ensuring they approach assessment with confidence and achieve their full potential.
+            </p>
+            <a href="#" class="section-button">Certification Programs</a>
+        </div>
+        <div class="section-image">
+            <img src="certificates.png" alt="Our Certification Programs">
+        </div>
+    </div>
+</section>
+
+<!-- Add this CSS to your existing stylesheet -->
+<style>
+    /* Section Container Styles */
+    .section-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+    }
+
+    .content-section.visible .section-container {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Image and Content Layout */
+    .section-image, .section-content {
+        flex: 1;
+    }
+
+    .section-image {
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        height: 400px;
+    }
+
+    .section-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .section-container:hover .section-image img {
+        transform: scale(1.05);
+    }
+
+    /* Section Content Styles */
+    .section-content {
+        padding: 20px 0;
+    }
+
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #3a47d5, #00d2ff);
+        border-radius: 3px;
+    }
+
+    .subsection-title {
+        font-size: 20px;
+        margin: 15px 0;
+        color: #3a47d5;
+    }
+
+    .section-text {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .section-button {
+        display: inline-block;
+        padding: 10px 25px;
+        background: linear-gradient(45deg, #3a47d5, #00d2ff);
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .section-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+        .section-container {
+            gap: 30px;
+        }
+        
+        .section-image {
+            height: 350px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-container {
+            flex-direction: column;
+        }
+        
+        .left-image, .right-image {
+            flex-direction: column;
+        }
+        
+        .left-image .section-image {
+            order: 1;
+        }
+        
+        .left-image .section-content {
+            order: 2;
+        }
+        
+        .right-image .section-image {
+            order: 1;
+        }
+        
+        .right-image .section-content {
+            order: 2;
+        }
+        
+        .section-image, .section-content {
+            width: 100%;
+        }
+        
+        .section-image {
+            height: 300px;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .section-container {
+            gap: 20px;
+        }
+        
+        .section-image {
+            height: 250px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+        }
+        
+        .subsection-title {
+            font-size: 18px;
+        }
+        
+        .section-text {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+    }
+</style>
+
+       
+        
+        
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+});
+
+    </script>
+    <style>
+        /* General Reset */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+        body {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+    
+        main {
+          flex-grow: 1;
+          background-color: #f5f5f5;
+          padding: 20px;
+        }
+    
+        /* Footer Container */
+        footer {
+          background: linear-gradient(135deg, #2c3e50, #1a252f);
+          color: #fff;
+          padding: 40px 0 20px;
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+    
+        /* Animated Background Effect */
+        footer::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+          opacity: 0.2;
+          z-index: -1;
+          animation: backgroundMove 30s linear infinite;
+        }
+    
+        @keyframes backgroundMove {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 100px 100px;
+          }
+        }
+    
+        .footer-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+    
+        /* Footer Top Section */
+        .footer-top {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin-bottom: 40px;
+          opacity: 0;
+          animation: fadeIn 0.8s ease forwards;
+        }
+    
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+    
+        /* Logo Section */
+        .footer-logo {
+          flex: 1 1 250px;
+          margin-bottom: 20px;
+        }
+    
+        .footer-logo img {
+          max-width: 150px;
+          height: auto;
+          margin-bottom: 15px;
+          transition: transform 0.3s ease;
+        }
+    
+        .footer-logo img:hover {
+          transform: scale(1.05);
+        }
+    
+        .footer-logo p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #ecf0f1;
+          max-width: 300px;
+        }
+    
+        /* Footer Navigation */
+        .footer-nav {
+          flex: 1 1 200px;
+          margin-bottom: 20px;
+          animation-delay: 0.2s;
+        }
+    
+        .footer-nav h3 {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 15px;
+          position: relative;
+          padding-bottom: 10px;
+        }
+    
+        .footer-nav h3::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 40px;
+          height: 3px;
+          background: #3498db;
+          transition: width 0.3s ease;
+        }
+    
+        .footer-nav:hover h3::after {
+          width: 60px;
+        }
+    
+        .footer-nav ul {
+          list-style: none;
+        }
+    
+        .footer-nav ul li {
+          margin-bottom: 10px;
+        }
+    
+        .footer-nav ul li a {
+          color: #bdc3c7;
+          text-decoration: none;
+          transition: color 0.3s ease, transform 0.3s ease;
+          display: inline-block;
+          position: relative;
+        }
+    
+        .footer-nav ul li a::before {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 1px;
+          bottom: -2px;
+          left: 0;
+          background-color: #3498db;
+          transition: width 0.3s ease;
+        }
+    
+        .footer-nav ul li a:hover {
+          color: #3498db;
+          transform: translateX(5px);
+        }
+    
+        .footer-nav ul li a:hover::before {
+          width: 100%;
+        }
+    
+        /* Contact Section */
+        .footer-contact {
+          flex: 1 1 250px;
+          margin-bottom: 20px;
+          animation-delay: 0.4s;
+        }
+    
+        .contact-info {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 15px;
+        }
+    
+        .contact-info i {
+          margin-right: 10px;
+          color: #3498db;
+          font-size: 16px;
+          min-width: 16px;
+        }
+    
+        .contact-info p {
+          font-size: 14px;
+          line-height: 1.5;
+          color: #ecf0f1;
+        }
+    
+        /* Social Media Icons */
+        .social-icons {
+          display: flex;
+          gap: 15px;
+          margin-top: 20px;
+        }
+    
+        .social-icons a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+    
+        .social-icons a::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #3498db;
+          transform: scale(0);
+          border-radius: 50%;
+          transition: transform 0.3s ease;
+          z-index: -1;
+        }
+    
+        .social-icons a:hover {
+          transform: translateY(-5px);
+        }
+    
+        .social-icons a:hover::before {
+          transform: scale(1);
+        }
+    
+        /* Newsletter Signup */
+        .newsletter {
+          flex: 1 1 300px;
+          animation-delay: 0.6s;
+        }
+    
+        .newsletter form {
+          display: flex;
+          margin-top: 15px;
+        }
+    
+        .newsletter input {
+          flex: 1;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 4px 0 0 4px;
+          font-size: 14px;
+          outline: none;
+        }
+    
+        .newsletter button {
+          background-color: #3498db;
+          color: white;
+          border: none;
+          padding: 0 15px;
+          border-radius: 0 4px 4px 0;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+    
+        .newsletter button:hover {
+          background-color: #2980b9;
+        }
+        .newsletter p {
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  font-size: 14px;
+  line-height: 1.6;
+}
+        /* Footer Bottom Section */
+        .footer-bottom {
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          padding-top: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          animation: fadeIn 1s ease forwards;
+          animation-delay: 0.8s;
+        }
+    
+        .footer-bottom p {
+          font-size: 14px;
+          color: #bdc3c7;
+        }
+    
+        .footer-bottom-links {
+          display: flex;
+          gap: 20px;
+        }
+    
+        .footer-bottom-links a {
+          color: #bdc3c7;
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.3s ease;
+        }
+    
+        .footer-bottom-links a:hover {
+          color: #3498db;
+        }
+    
+        /* Back to Top Button */
+        .back-to-top {
+          position: absolute;
+          right: 30px;
+          bottom: 30px;
+          width: 40px;
+          height: 40px;
+          background-color: #3498db;
+          color: #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInButton 1s ease forwards;
+          animation-delay: 1s;
+        }
+    
+        @keyframes fadeInButton {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+    
+        .back-to-top:hover {
+          background-color: #2980b9;
+          transform: translateY(-5px);
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .footer-top {
+            flex-direction: column;
+          }
+          
+          .footer-logo, .footer-nav, .footer-contact, .newsletter {
+            flex: 1 1 100%;
+            margin-right: 0;
+          }
+          
+          .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: 15px;
+          }
+          
+          .footer-bottom-links {
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+          
+          .back-to-top {
+            right: 20px;
+            bottom: 20px;
+          }
+        }
+    
+        /* Animation for elements when they come into view */
+        .footer-animated {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+    
+        .footer-animated.show {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      </style>
+    </head>
+    <body>
+      
+    
+        <footer>
+            <div class="footer-container">
+              <!-- Footer Top Section -->
+              <div class="footer-top">
+                <!-- Logo and Description -->
+                <div class="footer-logo footer-animated">
+                  <img src="IMG_1990.PNG" alt="Shiva School of Music Logo">
+                  <p>Empowering music enthusiasts with expert training and a passion for excellence. Join us in the journey of melody and rhythm.</p>
+                </div>
+          
+                <!-- Quick Links Navigation -->
+                <div class="footer-nav footer-animated">
+                  <h3>Quick Links</h3>
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Branches</a></li>
+                    <li><a href="#">Events</a></li>
+                  </ul>
+                </div>
+          
+                <!-- Our Courses -->
+                <div class="footer-nav footer-animated">
+                  <h3>Our Courses</h3>
+                  <ul>
+                    <li><a href="#">Vocal Training</a></li>
+                    <li><a href="#">Instrumental Classes</a></li>
+                    <li><a href="#">Music Theory</a></li>
+                    <li><a href="#">Stage Performance</a></li>
+                    <li><a href="#">Personalized Coaching</a></li>
+                  </ul>
+                </div>
+          
+                <!-- Contact Information -->
+                <div class="footer-contact footer-animated">
+                  <h3>Contact Us</h3>
+                  <div class="contact-info">
+                    <i>📍</i>
+                    <p>Shiva School of Music, Branch 1 & 2</p>
+                  </div>
+                  <div class="contact-info">
+                    <i>📞</i>
+                    <p>+91 98765 43210</p>
+                  </div>
+                  <div class="contact-info">
+                    <i>✉️</i>
+                    <p>shivasschoolofmusic@gmail.com</p>
+                  </div>
+          
+                  <!-- Social Media Icons -->
+                  <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><img src="youtube.png" width="40px"></a>
+                    <a href="#" aria-label="Instagram"><img src="facebook.png" width="40px"></a>
+                    <a href="#" aria-label="YouTube"><img src="twitter.png" width="40px"></a>
+                    <a href="#" aria-label="WhatsApp"><img src="instagram.png" width="40px"></a>
+                  </div>
+                </div>
+          
+                <!-- Newsletter Signup -->
+                <style>
+                   .newsletter form {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  max-width: 400px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Adjusted for better visibility */
+}
+
+.newsletter form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+.newsletter .form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.newsletter input,
+.newsletter textarea {
+  width: 100%;
+  padding: 12px 15px;
+  color: #2c3e50;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #2c3e50;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.newsletter input {
+  height: 45px;
+}
+
+.newsletter input:focus,
+.newsletter textarea:focus {
+  border-color: #3498db;
+}
+
+.newsletter input::placeholder,
+.newsletter textarea::placeholder {
+  color: #95a5a6;
+  transition: opacity 0.3s ease;
+}
+
+.newsletter input:focus::placeholder,
+.newsletter textarea:focus::placeholder {
+  opacity: 0.7;
+}
+
+.newsletter textarea {
+  height: 120px;
+  border: 2px solid #2c3e50;
+  border-radius: 12px;
+  margin-top: 15px;
+  resize: none;
+  line-height: 1.5;
+}
+
+.newsletter button {
+  height: 50px;
+  margin-top: 10px;
+  padding: 0 25px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.newsletter button:hover {
+  background: linear-gradient(135deg, #2980b9, #1a5276);
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+  transform: translateY(-2px);
+}
+
+.newsletter button:active {
+  transform: translateY(1px);
+}
+
+                  </style>
+                  
+                  <div class="newsletter footer-animated">
+                    <h3>Stay Tuned</h3>
+                    <p>Subscribe for the latest music courses, workshops, and events.</p>
+                    <form id="emailForm">
+                        <div class="form-group">
+                          <input type="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <textarea id="message" placeholder="Type your message here..." required></textarea>
+                        <button type="submit">Send Message</button>
+                      </form>
+                      
+                      <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+                      <script>
+                        document.getElementById("emailForm").addEventListener("submit", function (event) {
+                          event.preventDefault();
+                          
+                          const email = document.getElementById("email").value;
+                          const message = document.getElementById("message").value;
+                          
+                          emailjs.init("W99TVUtTOItoLLt1K");
+                          
+                          emailjs.send("sivasschoolofmusic", "template_4lmvy44", {
+                            from_email: email,
+                            message: message
+                          }).then(
+                            function (response) {
+                              console.log("SUCCESS:", response);
+                              window.location.href = "success.html"; // Redirect to success page
+                            },
+                            function (error) {
+                              console.error("ERROR:", error);
+                              window.location.href = "error.html"; // Redirect to error page
+                            }
+                          );
+                        });
+                      </script>
+                    </div>
+                    
+                    
+                  
+              <!-- Footer Bottom Section --><br>
+              <div class="footer-bottom">
+                <p>&copy; 2025 Shiva School of Music. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                  <a href="#">Privacy Policy</a>
+                  <a href="#">Terms & Conditions</a>
+                </div>
+              </div>
+            </div>
+          
+          
+    
+        <!-- Back to Top Button -->
+        
+      </footer>
+    
+      <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+          const animatedElements = document.querySelectorAll('.footer-animated');
+          
+          function checkVisibility() {
+            animatedElements.forEach(element => {
+              const elementPosition = element.getBoundingClientRect();
+              const windowHeight = window.innerHeight;
+              
+              if (elementPosition.top < windowHeight * 0.9) {
+                element.classList.add('show');
+              }
+            });
+          }
+          
+          // Check on load
+          checkVisibility();
+          
+          // Check on scroll
+          window.addEventListener('scroll', checkVisibility);
+          
+          // Smooth scroll for Back to Top button
+          document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          });
+        });
+      </script>
+    <script>
+        // Slideshow functionality
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideInterval;
+        
+        // Initialize slideshow
+        startSlideshow();
+        
+        // Function to start automatic slideshow
+        function startSlideshow() {
+            // Clear any existing interval
+            clearInterval(slideInterval);
+            
+            // Set new interval - change slide every 3 seconds
+            slideInterval = setInterval(() => {
+                changeSlide(currentSlideIndex + 1);
+            }, 4000);
+        }
+        
+        // Function to show a specific slide
+        function showSlide(index) {
+            // Handle edge cases
+            if (index >= slides.length) {
+                index = 0;
+            } else if (index < 0) {
+                index = slides.length - 1;
+            }
+            
+            // Update current index
+            currentSlideIndex = index;
+            
+            // Hide all slides and deactivate all dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show current slide and activate current dot
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+            
+            // Restart slideshow timer
+            startSlideshow();
+        }
+        
+        // Function to change slide (called by next/prev buttons)
+        function changeSlide(index) {
+            showSlide(index);
+        }
+        
+        // Function to set current slide (called by dots)
+        function currentSlide(index) {
+            showSlide(index);
+        }
+        
+        // Event listeners for next and previous buttons
+        document.querySelector('.next').addEventListener('click', () => {
+            changeSlide(currentSlideIndex + 1);
+        });
+        
+        document.querySelector('.prev').addEventListener('click', () => {
+            changeSlide(currentSlideIndex - 1);
+        });
+        
+        // Add click events to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide(index);
+            });
+        });
+    </script>
+    <script>
+        // Toggle sidebar
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        });
+        
+        document.getElementById('close-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        // Toggle dropdown menu
+        document.getElementById('menu-button').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('dropdown-menu').classList.toggle('active');
+        });
+        
+        // Close dropdown menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown-menu');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+                menuButton.classList.remove('active');
+            }
+        });
+        
+        // Animation for content sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section, .hero-section, .branches-section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Check visibility on load
+            checkVisibility();
+            
+            // Check visibility on scroll
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+</body>
+</html>

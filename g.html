@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivas' School Of Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #3a47d5, #ff44d7);
+            border-bottom: 5px solid #f0c929;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger-menu {
+            width: 30px;
+            height: 35px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .hamburger-menu:hover {
+            transform: rotate(2deg);
+        }
+
+        .logo-container {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            padding-right: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            opacity: 0.6;
+        }
+
+        /* Right Section Styles */
+        .right-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dropdown Menu Styles */
+        .menu-dropdown {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .menu-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #3a47d5;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-button:after {
+            content: "";
+            display: inline-block;
+            margin-left: 8px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #3a47d5;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-button.active:after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f5f9;
+            color: #3a47d5;
+            padding-left: 20px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 8px 0;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background: linear-gradient(45deg, #3a47d5, #00d2ff);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Initially hidden */
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+    transition: left 0.6s ease-out, opacity 0.4s ease-in, transform 0.6s ease-out;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(-30px); /* Starts slightly left for a smoother effect */
+}
+
+/* Active State - Sidebar Appears */
+.sidebar.active {
+    left: 0;
+    opacity: 1;
+    transform: translateX(0); /* Moves naturally into place */
+}
+
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-button:hover {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-logo {
+            width: 100%;
+            margin: 10px auto 30px;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            margin-left: 20px;
+        }
+
+        .sidebar-logo img {
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .sidebar-menu-item:hover {
+            background-color: #a8cdf3;
+            color: #3a47d5;
+        }
+
+        .sidebar-menu-item img {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar hr {
+            height: 1px;
+            background: #e5e7eb;
+            border: none;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .social-container {
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        .social-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon.facebook {
+            background: #1877f2;
+        }
+
+        .social-icon.twitter {
+            background: #1da1f2;
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icon.linkedin {
+            background: #0077b5;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+          /* Responsive Styles */
+          @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                width: 350px;
+                max-height: 400px;
+            }
+
+            .card-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .search-container {
+                max-width: 300px;
+            }
+
+            .sidebar {
+                width: 250px;
+                left: -250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 200px;
+                margin: 0 10px;
+            }
+            
+            .menu-button span {
+                display: none;
+            }
+            
+            .login-button {
+                display: none;
+            }
+            
+            .logo-container {
+                width: 40px;
+                height: 40px;
+            }
+
+            .sidebar {
+                width: 230px;
+                left: -230px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 10px 15px;
+            }
+            
+            .search-container {
+                max-width: 150px;
+            }
+            
+            .hamburger-menu {
+                margin-right: 10px;
+                width: 25px;
+                height: 25px;
+            }
+            
+            .main-content {
+                padding: 30px 15px;
+            }
+            
+            .sidebar {
+                width: 200px;
+                left: -200px;
+                padding: 15px;
+            }
+
+            .sidebar-menu-item {
+                padding: 10px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                max-width: 120px;
+            }
+            
+            .menu-dropdown {
+                margin-right: 5px;
+            }
+            
+            .menu-button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="left-section">
+            <img src="ham.png" alt="Menu" class="hamburger-menu" id="hamburger-menu">
+            <div class="logo-container">
+                <img src="IMG_1990.PNG" alt="Music School Logo" id="company-logo">
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <img src="search.png" alt="Search" class="search-icon">
+        </div>
+        
+        <div class="right-section">
+            <div class="menu-dropdown">
+                <button class="menu-button" id="menu-button">Menu</button>
+                <div class="dropdown-content" id="dropdown-menu">
+                    <a href="#aboutus">About Us</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#branches">Branches</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Need Help?</a>
+                    <a href="$">explore Classes</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Youtube</a>
+                </div>
+            </div>
+            <button class="login-button">Login</button>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <img src="close.png" alt="Close" class="close-button" id="close-button">
+        <div class="sidebar-logo">
+            <img src="IMG_1990.PNG" alt="Music School Logo" id="sidebar-logo">
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="home.png" alt="Home"> Home
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="classes.png" alt="Classes"> Music Classes
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="teachers.png" alt="Teachers"> Our Teachers
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="instruemtns.png" alt="Instruments"> Instruments
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="shedule.png" alt="Schedule"> Class Schedule
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="upcoming events.png" alt="Events"> Upcoming Events
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="about us.png" alt="About"> About Us
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="contactus.png" alt="Contact"> Contact
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="faq.png" alt="FAQ"> FAQ
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-item">
+                    <img src="enroll.png" alt="Enroll"> Enroll Now
+                </a>
+            </li>
+        </ul>
+        
+        <div class="social-container">
+            <p class="social-title">Follow us on</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Music School. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    <script>
+        // Toggle sidebar
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        });
+        
+        document.getElementById('close-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+        
+        // Toggle dropdown menu
+        document.getElementById('menu-button').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('dropdown-menu').classList.toggle('active');
+        });
+        
+        // Close dropdown menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown-menu');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+                menuButton.classList.remove('active');
+            }
+        });
+        
+        // Animation for content sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section, .hero-section, .branches-section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Check visibility on load
+            checkVisibility();
+            
+            // Check visibility on scroll
+            window.addEventListener('scroll', checkVisibility);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+});
+
+    </script></body></html>
